@@ -1,0 +1,52 @@
+test_settings = {
+    'theme': 'dark', 
+    'notifications': 'enabled', 
+    'volume': 'high'
+    }
+
+def add_setting(settings, pair):
+    key, value = pair
+    key = key.lower()
+    value = value.lower()
+
+    for existing_key in settings:
+
+        if existing_key.lower() == key:            
+            return f"Setting '{key}' already exists! Cannot add a new setting with this name."
+        settings[key] = value
+        return f"Setting '{key}' added with value '{value}' successfully!"
+
+        
+def update_setting(settings, pair):
+    key, value = pair
+    key = key.lower()
+    value = value.lower()
+
+    for existing_key in settings:
+        if existing_key.lower() == key:
+            settings[key] = value
+            return f"Setting '{key}' updated to '{value}' successfully!"
+    return f"Setting '{key}' does not exist! Cannot update a non-existing setting."  
+
+
+def delete_setting(settings, key):
+    key = key.lower()
+
+    for existing_key in settings:
+        if existing_key.lower() == key:
+            settings.pop(key)
+            return f"Setting '{key}' deleted successfully!"
+    return "Setting not found!"       
+
+def view_settings(settings):
+    string = ""
+    
+    if len(settings) == 0:
+        return "No settings available." 
+
+    for key, value in settings.items():
+        string += f"{key.title()}: {value.lower()}\n"
+
+    return f"Current User Settings:\n{string}"     
+
+print(view_settings(test_settings))
